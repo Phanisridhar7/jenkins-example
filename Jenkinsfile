@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Phanisridhar7/maven-web-app-youtuber.git']]) 
+               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: '']]) 
             }
         }
         stage('build'){
