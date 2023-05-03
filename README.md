@@ -5,3 +5,4 @@
 - if the number is divisible by 5, you say Buzz
 - if neither, you say the number
 v cbc bnDZ C ZXBN
+ xczb bsd cNBD caN cAN
