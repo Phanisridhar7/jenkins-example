@@ -1,31 +1,19 @@
-pipeline {
+pipeline{
     agent any
-
-    stages {
-        stage ('Compile Stage') {
-
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn clean compile'
-                }
+    stages{
+        stage('checkout'){
+            steps{
+               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Phanisridhar7/maven-web-app-youtuber.git']]) 
             }
         }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn test'
-                }
-            }
+        stage('build'){
+            steps{
+               sh 'mvn package'
+             }
         }
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn deploy'
-                }
+        stage('deploy to tomcat'){
+            steps{
+               deploy adapters: [tomcat9(credentialsId: '42e27830-4da3-41a5-8022-37ed1eb0c5a8', path: '', url: 'http://16.16.193.126:8080/')], contextPath: null, war: '**/*.war'
             }
         }
     }
